@@ -65,9 +65,9 @@ Include at least **2 visualizations** (e.g., a bar chart for revenue per categor
 ## How to Run the Project
 1. Clone this repository:
    ```bash
-   git clone https://github.com
+   git clone https://github.com/Hakan-Fridlund/PYSTDA45-group_exercise-E-commerce-Quick-Report_GitHub-Collaboration.git
    ```
-2. Install dependencies (e.g., pandas, matplotlib, seaborn):
+2. Install dependencies (e.g., pandas, matplotlib, jupyter et.c.):
    ```bash
    pip install -r requirements.txt
    ```
