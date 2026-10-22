@@ -20,8 +20,8 @@ The report must conclude with **2–3 actionable recommendations** (bullet point
 ---
 
 ## Dataset (CSV)
-* **Filename:** `ecommerce_sales.csv`
-* **Columns:** `order_id`, `date`, `city`, `category`, `price`, `units`, `revenue`
+* **Filename:** ecommerce_sales.csv
+* **Columns:** order_id, date, city, category, price, units, revenue
 
 ---
 
@@ -45,7 +45,7 @@ Include at least **2 visualizations** (e.g., a bar chart for revenue per categor
 * Each plot must feature clear headers, labeled axes, and 1–2 sentences of Markdown explaining the insights.
 
 ### 4. Code Quality
-* Write at least **2 custom Python functions** for calculations (e.g., `compute_revenue()` or `top_categories()`).
+* Write at least **2 custom Python functions** for calculations (e.g., compute_revenue() or top_categories()).
 * Ensure the notebook runs without any errors from start to finish.
 
 ---
@@ -81,5 +81,25 @@ Include at least **2 visualizations** (e.g., a bar chart for revenue per categor
 * **[Bijayalaxmi Dash]**: Responsible for developing business metrics in src/metrics.py, creating functions to analyze KPI´s like revenue, total units, Average Order Value (AOV) and regional/category sales
 * **[Marwa Elsentawy]**: Responsible for creating data visualization functions in src/viz.py, generating labeled bar and line charts to track revenue by category and sales trends over time
 * **[Zahra Ebrahimi]**: Responsible for compiling the final report in notebooks/report.ipynb, executing the analysis pipeline to display metrics and charts alongside narrative insights, outliers, and strategic recommendations
-* **[Emelie Karlström]**: Quality Assurance & Integration Lead, Responsible for code reviews, pull request approvals, and manual integration testing to ensure error-free execution and full compliance with all project requirements
+* **[Emelie Karlström]**: Quality Assurance & Integration Lead, responsible for code reviews, pull request approvals, and manual integration testing to ensure error-free execution and full compliance with all project requirements
+
+---
+
+## Tools & Technologies
+
+During this project, the team utilized the following development tools and libraries:
+* **Python** – The primary programming language used for all logic and analysis.
+* **Pandas** – For data ingestion, comprehensive data cleaning, and statistical calculations.
+* **Matplotlib** – For generating and styling the analytics visualizations (bar and line charts).
+* **Jupyter Notebook** – As the interactive environment to compile and present the final executive report.
+* **Git & GitHub** – For version control, issue tracking, and a Kanban-based project management workflow.
+
+## Insights & Key Takeaways
+
+Through this collaborative exercise, the team gained valuable insights into both technical pipelines and cooperative development workflows:
+* **The Power of Modular Programming** – Splitting tasks into dedicated modules allowed us to work in parallel without blocking each other. Integrating everything into a central class proved the value of clean, reusable code architecture.
+* **Hands-on EDA & Analytical Experience** – Conducting Exploratory Data Analysis (EDA) allowed us to bridge the gap between raw data and business value. We gained practical experience in uncovering seasonal trends, identifying outliers, and transforming analytical findings into concrete management recommendations.
+* **Git Workflow Mastery** – Using an active Kanban board, naming feature branches properly, and enforcing a thorough Pull Request review process gave us practical experience in avoiding merge conflicts and maintaining main branch stability.
+* **Data Integrity Matters** – We realized how crucial the initial data cleaning phase is; validating types and testing internal logic (like revenue consistency) early prevented errors from cascading into our metrics and visualizations.
+
 
