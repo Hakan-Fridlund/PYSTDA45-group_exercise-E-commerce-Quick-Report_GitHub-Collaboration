@@ -76,6 +76,10 @@ Include at least **2 visualizations** (e.g., a bar chart for revenue per categor
 ---
 
 ## Team Roles & Responsibilities
-* **[Member 1 Name]**: *e.g., Repository Setup, Data Cleaning, and KPI functions*
-* **[Member 2 Name]**: *e.g., Visualizations, Plot Styling, and Markdown explanations*
-* **[Member 3 Name]**: *e.g., Code Quality Review, Documentation, and Recommendations*
+* **[Håkan Fridlund]**: Project architecture, documentation, and workflow management - as well as developing the EcommerceAnalyzer class to integrate data functions
+* **[Sabine Magnusson]**: Responsible for implementing and cleaning the data pipeline in src/io_utils.py, which involved handling missing data, correcting types, and verifying revenue logic to provide a structured dataset
+* **[Bijayalaxmi Dash]**: Responsible for developing business metrics in src/metrics.py, creating functions to analyze KPI´s like revenue, total units, Average Order Value (AOV) and regional/category sales
+* **[Marwa Elsentawy]**: Responsible for creating data visualization functions in src/viz.py, generating labeled bar and line charts to track revenue by category and sales trends over time
+* **[Zahra Ebrahimi]**: Responsible for compiling the final report in notebooks/report.ipynb, executing the analysis pipeline to display metrics and charts alongside narrative insights, outliers, and strategic recommendations
+* **[Emelie Karlström]**: Quality Assurance & Integration Lead, Responsible for code reviews, pull request approvals, and manual integration testing to ensure error-free execution and full compliance with all project requirements
+
