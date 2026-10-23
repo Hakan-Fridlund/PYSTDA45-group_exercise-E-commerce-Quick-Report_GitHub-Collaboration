@@ -88,7 +88,7 @@ Include at least **2 visualizations** (e.g., a bar chart for revenue per categor
 ## Tools & Technologies
 
 During this project, the team utilized the following development tools and libraries:
-* **Python** – The primary programming language used for all logic and analysis.
+* **Python 3.14.7** – The primary programming language used for all logic and analysis.
 * **Pandas** – For data ingestion, comprehensive data cleaning, and statistical calculations.
 * **Matplotlib** – For generating and styling the analytics visualizations (bar and line charts).
 * **Jupyter Notebook** – As the interactive environment to compile and present the final executive report.
