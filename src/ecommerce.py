@@ -41,7 +41,7 @@ class EcommerceAnalyzer:
     def compute_aov(self) -> float:
         """Average Order Value = total revenue / number of unique orders.
         Calls on src.metrics function in the background."""
-        return metrics.compute_aov(self.df)
+        return metrics.compute_aov(self.df).round(2)
 
     def revenue_by_category(self) -> pd.DataFrame:
         """Revenue per category.
@@ -61,9 +61,9 @@ class EcommerceAnalyzer:
 if __name__ == "__main__":
     ea = EcommerceAnalyzer()
     print(f"testing compute_revenue\nTotal revenue:\n {ea.compute_revenue()}")
-    print(f"testing compute_units\nTotal units sold: {ea.compute_units()}")
-    print(f"testing compute_aov\nAverage order value: {ea.compute_aov()}")
-    print(f"testing revenue_by_category\nRevenue by category: {ea.revenue_by_category()}")
-    print(f"testing revenue_by_city\nRevenue by city: {ea.revenue_by_city()}")
-    print(f"testing top_categories\nTop3 categories: {ea.top_categories()}")
-    print(f"testing top_categories with argument\nTop5 categories: {ea.top_categories(5)}")
+    print(f"testing compute_units\nTotal units sold:\n {ea.compute_units()}")
+    print(f"testing compute_aov\nAverage order value:\n {ea.compute_aov()}")
+    print(f"testing revenue_by_category\nRevenue by category:\n {ea.revenue_by_category()}")
+    print(f"testing revenue_by_city\nRevenue by city:\n {ea.revenue_by_city()}")
+    print(f"testing top_categories\nTop3 categories:\n {ea.top_categories()}")
+    print(f"testing top_categories with argument\nTop5 categories:\n {ea.top_categories(5)}")
