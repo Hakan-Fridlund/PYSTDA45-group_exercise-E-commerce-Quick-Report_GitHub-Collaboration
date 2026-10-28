@@ -31,7 +31,7 @@ class EcommerceAnalyzer:
     def compute_revenue(self) -> float:
         """Total revenue.
         Calls on src.metrics.compute_revenue in the background."""
-        return metrics.compute_revenue(self.df)
+        return round(metrics.compute_revenue(self.df),2)
 
     def compute_units(self) -> int:
         """Total number of units sold.
