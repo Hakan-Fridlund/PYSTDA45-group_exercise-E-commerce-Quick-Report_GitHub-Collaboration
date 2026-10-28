@@ -41,7 +41,7 @@ class EcommerceAnalyzer:
     def compute_aov(self) -> float:
         """Average Order Value = total revenue / number of unique orders.
         Calls on src.metrics function in the background."""
-        return metrics.compute_aov(self.df).round(2)
+        return round(metrics.compute_aov(self.df),2)
 
     def revenue_by_category(self) -> pd.DataFrame:
         """Revenue per category.
