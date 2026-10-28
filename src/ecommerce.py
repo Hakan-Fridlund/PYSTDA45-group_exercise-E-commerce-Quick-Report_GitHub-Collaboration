@@ -14,7 +14,7 @@ import src.metrics as metrics
 # import src.viz
 
 
-DATAPATH = "../data/ecommerce_sales.csv"
+DATAPATH = "data/ecommerce_sales.csv"
 
 class EcommerceAnalyzer:
     """
@@ -57,7 +57,7 @@ class EcommerceAnalyzer:
 
 if __name__ == "__main__":
     ea = EcommerceAnalyzer()
-    print(f"testing compute_revenue\nTotal revenue: {ea.compute_revenue()}")
+    print(f"testing compute_revenue\nTotal revenue:\n {ea.compute_revenue()}")
     print(f"testing compute_units\nTotal units sold: {ea.compute_units()}")
     print(f"testing compute_aov\nAverage order value: {ea.compute_aov()}")
     print(f"testing revenue_by_category\nRevenue by category: {ea.revenue_by_category()}")
