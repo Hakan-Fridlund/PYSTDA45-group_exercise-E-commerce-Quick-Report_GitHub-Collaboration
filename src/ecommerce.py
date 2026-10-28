@@ -4,17 +4,20 @@ Class EcommerceAnalyzer
 takes filepath as arg and runs load_data on init, default filepath is "../data/ecommerce_sales.csv" 
 wrapper class, import the functions for calculating metrics and visualizing diagrams from dataframe
 """
+from pathlib import Path
 import sys
-import os
+SRC_DIR = Path(__file__).resolve().parent
+ROOT_DIR = SRC_DIR.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 import pandas as pd
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import src.io_utils as io
 import src.metrics as metrics
+SRC_DIR = Path(__file__).resolve().parent
 # TODO implement src.viz
 # import src.viz
 
-
-DATAPATH = "data/ecommerce_sales.csv"
+DATAPATH = SRC_DIR.parent / "data" / "ecommerce_sales.csv"
 
 class EcommerceAnalyzer:
     """
@@ -43,17 +46,17 @@ class EcommerceAnalyzer:
     def revenue_by_category(self) -> pd.DataFrame:
         """Revenue per category.
         Calls on src.metrics function in the background."""
-        return metrics.revenue_by_category(self.df)
+        return metrics.revenue_by_category(self.df).round(2)
 
     def revenue_by_city(self) -> pd.DataFrame:
         """Revenue per city.
         Calls on src.metrics function in the background."""
-        return metrics.revenue_by_city(self.df)
+        return metrics.revenue_by_city(self.df).round(2)
 
     def top_categories(self, n:int = 3) -> pd.DataFrame:
         """The n categories with the highest revenue (default: top 3)
         Calls on src.metrics function in the background."""
-        return metrics.top_categories(self.df, n = n)
+        return metrics.top_categories(self.df, n = n).round(2)
 
 if __name__ == "__main__":
     ea = EcommerceAnalyzer()
