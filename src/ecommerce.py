@@ -11,11 +11,11 @@ ROOT_DIR = SRC_DIR.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import src.io_utils as io
 import src.metrics as metrics
-SRC_DIR = Path(__file__).resolve().parent
-# TODO implement src.viz
-# import src.viz
+import src.viz as viz
 
 DATAPATH = SRC_DIR.parent / "data" / "ecommerce_sales.csv"
 
@@ -24,7 +24,7 @@ class EcommerceAnalyzer:
     Takes filepath as argument and runs the load_data on init
     default filepath is "../data/ecommerce_sales.csv" 
     """
-    def __init__(self, path: str = DATAPATH):
+    def __init__(self, path = DATAPATH):
         self.df = io.load_data(path)
 
 
@@ -57,6 +57,59 @@ class EcommerceAnalyzer:
         """The n categories with the highest revenue (default: top 3)
         Calls on src.metrics function in the background."""
         return metrics.top_categories(self.df, n = n).round(2)
+
+
+
+
+    def plot_revenue_by_category(self) -> plt.Axes:
+        """Plots bar diag with revenue by category.
+        Displays chart automatically (no need for plt.show() in notebook)
+        return viz.plot_revenue_by_category(self.df)"""
+
+    def plot_revenue_by_city(self) -> plt.Axes:
+        """Plots line diag with revenue by city. 
+        Displays chart automatically (no need for plt.show() in notebook)
+        Calls on src.viz function in the background."""
+        return viz.plot_revenue_by_city(self.df)
+
+    def plot_revenue_over_time(self) -> plt.Axes:
+        """Plots line diag with revenue over time, with regression line.
+        Displays chart automatically (no need for plt.show() in notebook)
+        Calls on src.viz function in the background."""
+        return viz.plot_revenue_over_time(self.df)
+
+    def plot_total_revenue_and_units(self) -> numpy.ndarray:
+        """Plots bar diag with total revenue and units, returns an array with 2plt.Axes
+        Displays chart automatically (no need for plt.show() in notebook),
+        Calls on src.viz function in the background."""
+        return viz.plot_total_revenue_and_units(self.df)
+
+    def plot_aov(self) -> plt.Axes:
+        """Boxplot diag with distribution of revenue.
+        Displays chart automatically (no need for plt.show() in notebook)
+        Calls on src.viz function in the background."""
+        return viz.plot_aov(self.df)
+
+    def plot_top_3categories(self) -> plt.Axes:
+        """Plots bar diag for revenue of top 3 categories.
+        Displays chart automatically (no need for plt.show() in notebook)
+        Calls on src.viz function in the background."""
+        return viz.plot_top_3categories(self.df)
+
+    def plot_swarm(self) -> plt.Axes:
+        sns.set_style('darkgrid')
+        ax = sns.swarmplot(x='category', y='price', data=self.df, size=1.5, hue='category', palette='colorblind')
+        plt.title('Prisfördelning per kategori', fontsize=14, fontweight='bold', pad=15)
+        plt.xlabel('Kategori', fontsize=11, labelpad=10)
+        plt.ylabel('Pris per enhet (kr)', fontsize=11, labelpad=10)
+        plt.xticks(rotation=60)
+        plt.show()
+        return ax
+
+    def get_outliers(self, k=3.0):
+        q1, q3 = self.df['revenue'].quantile([0.25, 0.75])
+        iqr = q3 - q1
+        return self.df[(self.df['revenue'] < (q1 - k * iqr)) | (self.df['revenue'] > (q3 + k * iqr))].sort_values(by='revenue', ascending=False).head(5)
 
 if __name__ == "__main__":
     ea = EcommerceAnalyzer()
