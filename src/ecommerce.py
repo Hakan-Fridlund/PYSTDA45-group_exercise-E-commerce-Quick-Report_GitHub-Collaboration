@@ -1,8 +1,7 @@
 """
-ecommerce
-Class EcommerceAnalyzer
-takes filepath as arg and runs load_data on init, default filepath is "../data/ecommerce_sales.csv" 
-wrapper class, import the functions for calculating metrics and visualizing diagrams from dataframe
+Class EcommerceAnalyzer for analyzing data.
+mostly a wrapper class, imports the functions for loading and cleaning data, 
+calculating metrics and visualizing diagrams on dataframe.
 """
 from pathlib import Path
 import sys
@@ -11,11 +10,12 @@ ROOT_DIR = SRC_DIR.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import src.io_utils as io
 import src.metrics as metrics
-import src.viz as viz
+#TODO: import src.viz as viz
 
 DATAPATH = SRC_DIR.parent / "data" / "ecommerce_sales.csv"
 
@@ -23,9 +23,11 @@ class EcommerceAnalyzer:
     """
     Takes filepath as argument and runs the load_data on init
     default filepath is "../data/ecommerce_sales.csv" 
+    Also creates an instance of Ecommerce_viz for plot functions.
     """
     def __init__(self, path = DATAPATH):
         self.df = io.load_data(path)
+        #TODO: self.viz_engine = viz.Ecommerce_viz(self.df)
 
 
     def compute_revenue(self) -> float:
@@ -64,52 +66,67 @@ class EcommerceAnalyzer:
     def plot_revenue_by_category(self) -> plt.Axes:
         """Plots bar diag with revenue by category.
         Displays chart automatically (no need for plt.show() in notebook)
-        return viz.plot_revenue_by_category(self.df)"""
+        Calls on src.viz class enginge in the background."""
+        return self.viz_engine.plot_revenue_by_category()
 
     def plot_revenue_by_city(self) -> plt.Axes:
         """Plots line diag with revenue by city. 
         Displays chart automatically (no need for plt.show() in notebook)
-        Calls on src.viz function in the background."""
-        return viz.plot_revenue_by_city(self.df)
+        Calls on src.viz class enginge in the background."""
+        return self.viz_engine.plot_revenue_by_city()
 
-    def plot_revenue_over_time(self) -> plt.Axes:
+    def plot_revenue_over_time(self) -> None:
         """Plots line diag with revenue over time, with regression line.
         Displays chart automatically (no need for plt.show() in notebook)
-        Calls on src.viz function in the background."""
-        return viz.plot_revenue_over_time(self.df)
+        Calls on src.viz class enginge in the background."""
+        return self.viz_engine.plot_revenue_over_time()
 
-    def plot_total_revenue_and_units(self) -> numpy.ndarray:
+    def plot_total_revenue_and_units(self) -> np.ndarray:
         """Plots bar diag with total revenue and units, returns an array with 2plt.Axes
         Displays chart automatically (no need for plt.show() in notebook),
-        Calls on src.viz function in the background."""
-        return viz.plot_total_revenue_and_units(self.df)
+        Calls on src.viz class enginge in the background."""
+        return self.viz_engine.plot_total_revenue_and_unit()
 
     def plot_aov(self) -> plt.Axes:
         """Boxplot diag with distribution of revenue.
         Displays chart automatically (no need for plt.show() in notebook)
-        Calls on src.viz function in the background."""
-        return viz.plot_aov(self.df)
+        Calls on src.viz class enginge in the background."""
+        return self.viz_engine.plot_aov()
 
-    def plot_top_3categories(self) -> plt.Axes:
-        """Plots bar diag for revenue of top 3 categories.
+    def plot_top_3categories(self) -> None:
+        """Plots piechart for revenue of top 3 categories.
+        OBS! the function name in viz.py is misspelled catotegories.
         Displays chart automatically (no need for plt.show() in notebook)
-        Calls on src.viz function in the background."""
-        return viz.plot_top_3categories(self.df)
+        Calls on src.viz class enginge in the background."""
+        return self.viz_engine.plot_top_3catotegories()
 
     def plot_swarm(self) -> plt.Axes:
+        """Plots swarm diag for distribution of price per category"""
         sns.set_style('darkgrid')
-        ax = sns.swarmplot(x='category', y='price', data=self.df, size=1.5, hue='category', palette='colorblind')
-        plt.title('Prisfördelning per kategori', fontsize=14, fontweight='bold', pad=15)
-        plt.xlabel('Kategori', fontsize=11, labelpad=10)
-        plt.ylabel('Pris per enhet (kr)', fontsize=11, labelpad=10)
+        ax = sns.swarmplot(x='category',
+                           y='price',
+                           data=self.df,
+                           size=1.5,
+                           hue='category',
+                           palette='colorblind')
+
+        plt.title('Price Distribution by Category', fontsize=14, fontweight='bold', pad=15)
+        plt.xlabel('Category', fontsize=11, labelpad=10)
+        plt.ylabel('Price per Unit', fontsize=11, labelpad=10)
         plt.xticks(rotation=60)
         plt.show()
         return ax
 
-    def get_outliers(self, k=3.0):
+    def get_outliers(self, k:float=1.5 , n:int=5) -> pd.DataFrame:
+        """ The n top outliers, k value is default to 1.5 standard IQR factor,
+        can be raised to find extreme outliers"""
         q1, q3 = self.df['revenue'].quantile([0.25, 0.75])
         iqr = q3 - q1
-        return self.df[(self.df['revenue'] < (q1 - k * iqr)) | (self.df['revenue'] > (q3 + k * iqr))].sort_values(by='revenue', ascending=False).head(5)
+        return (self.df[(self.df['revenue'] < (q1 - k * iqr)) |
+                         (self.df['revenue'] > (q3 + k * iqr))]
+                .sort_values(by='revenue', ascending=False)
+                .head(n).set_index('order_id'))
+
 
 if __name__ == "__main__":
     ea = EcommerceAnalyzer()
