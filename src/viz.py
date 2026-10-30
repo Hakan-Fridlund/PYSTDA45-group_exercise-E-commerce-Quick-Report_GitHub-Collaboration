@@ -187,12 +187,9 @@ class Ecommerce_viz(base_viz):
             aov = order_revenue.mean()
             median_värde = order_revenue.median()
 
-            print(f"AOV: {aov:.2f} kr")
-            print(f"Median order value: {median_värde:.2f} kr")
-
             #boxplot
             fig, ax = plt.subplots(figsize=(10, 7))
-            ax.boxplot(order_revenue, vert=False,
+            ax.boxplot(order_revenue, orientation="horizontal",
                        patch_artist=True,
                        boxprops=dict(facecolor="lightblue"),
                        medianprops=dict(color="darkblue", linewidth=2))
@@ -229,9 +226,7 @@ class Ecommerce_viz(base_viz):
             #räkna total revenue, total unit
             total_revenue = data["revenue"].sum()
             total_unit = data["units"].sum()
-            print("Total revenue: ", round(total_revenue, 2))
-            print("Total units: ", round(total_unit, 2))
-
+            
             #Skapa en nykeltal figur
             fig, axes = plt.subplots(1, 2, figsize=(14, 8))
             fig.suptitle("Total Revenue and Units Sold", fontsize=16, fontweight="bold", y=0.98)
@@ -291,8 +286,6 @@ class Ecommerce_viz(base_viz):
             fig.subplots_adjust(top=0.82)
 
             plt.show()
-
-            print("Top 3 categories: ", (top_tre.round(2)))
    
             return ax
             
