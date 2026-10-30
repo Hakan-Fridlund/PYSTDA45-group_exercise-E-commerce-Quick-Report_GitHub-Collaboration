@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import src.io_utils as io
 import src.metrics as metrics
-#TODO: import src.viz as viz
+import src.viz as viz
 
 DATAPATH = SRC_DIR.parent / "data" / "ecommerce_sales.csv"
 
@@ -27,7 +27,7 @@ class EcommerceAnalyzer:
     """
     def __init__(self, path = DATAPATH):
         self.df = io.load_data(path)
-        #TODO: self.viz_engine = viz.Ecommerce_viz(self.df)
+        self.viz_engine = viz.Ecommerce_viz(self.df)
 
 
     def compute_revenue(self) -> float:
