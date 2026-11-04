@@ -63,17 +63,59 @@ Include at least **2 visualizations** (e.g., a bar chart for revenue per categor
 ---
 
 ## How to Run the Project
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/Hakan-Fridlund/PYSTDA45-group_exercise-E-commerce-Quick-Report_GitHub-Collaboration.git
-   ```
-2. Install dependencies (e.g., pandas, matplotlib, jupyter et.c.):
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Open and run the notebook inside the `notebooks/` directory.
 
----
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Hakan-Fridlund/PYSTDA45-group_exercise-E-commerce-Quick-Report_GitHub-Collaboration.git
+cd PYSTDA45-group_exercise-E-commerce-Quick-Report_GitHub-Collaboration
+```
+
+### 2. Create a virtual environment
+
+**Windows (PowerShell / Git Bash):**
+
+```bash
+python -m venv .venv
+```
+
+**macOS (Terminal):**
+
+```bash
+python3 -m venv .venv
+```
+
+### 3. Activate the virtual environment
+
+**Windows (PowerShell):**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**Windows (Git Bash):**
+
+```bash
+source .venv/Scripts/activate
+```
+
+**macOS (Terminal):**
+
+```bash
+source .venv/bin/activate
+```
+
+### 4. Install dependencies
+
+Run the following command from the project root directory:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 5. Run the notebook
+
+Open the project in VS Code, select the `.venv` Python interpreter as your Jupyter kernel, and open and run the notebook inside the `notebooks/` directory.
 
 ## Team Roles & Responsibilities
 * **[Håkan Fridlund]**: Project architecture, documentation, and workflow management - as well as developing the EcommerceAnalyzer class to integrate data functions
@@ -101,5 +143,3 @@ Through this collaborative exercise, the team gained valuable insights into both
 * **Hands-on EDA & Analytical Experience** – Conducting Exploratory Data Analysis (EDA) allowed us to bridge the gap between raw data and business value. We gained practical experience in uncovering seasonal trends, identifying outliers, and transforming analytical findings into concrete management recommendations.
 * **Git Workflow Mastery** – Using an active Kanban board, naming feature branches properly, and enforcing a thorough Pull Request review process gave us practical experience in avoiding merge conflicts and maintaining main branch stability.
 * **Data Integrity Matters** – We realized how crucial the initial data cleaning phase is; validating types and testing internal logic (like revenue consistency) early prevented errors from cascading into our metrics and visualizations.
-
-
